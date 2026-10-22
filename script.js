@@ -31,13 +31,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 const themeButton = document.getElementById("themeToggle");
 
+// Load the saved theme
+if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+}
+
 if (themeButton) {
+    if (document.body.classList.contains("dark-mode")) {
+        themeButton.textContent = "☀️ Light Mode";
+    }
+
     themeButton.addEventListener("click", function () {
         document.body.classList.toggle("dark-mode");
 
         if (document.body.classList.contains("dark-mode")) {
+            localStorage.setItem("theme", "dark");
             themeButton.textContent = "☀️ Light Mode";
         } else {
+            localStorage.setItem("theme", "light");
             themeButton.textContent = "🌙 Dark Mode";
         }
     });
